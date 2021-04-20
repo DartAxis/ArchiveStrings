@@ -2,27 +2,28 @@ package utils;
 
 public class ArchiveString {
 
-    public static String processString(String source) {
+    private ArchiveString() {
+    }
 
+    public static String processString(String source) {
         if (source == null || source.isEmpty()) {
             return "Неверно переданная строка";
         }
-        char[] chArr = source.toCharArray();
-        StringBuilder resultBuilder = new StringBuilder();
-        for (int i = 0; i < chArr.length; i++) {
-            int count = 1;
-            while ( i<chArr.length-1 && chArr[i] == chArr[i + 1]) {
-                count++;
-                if (i + 1 < (chArr.length)) {
-                    i++;
+        StringBuilder res = new StringBuilder();
+        int count = 1;
+        for (int i = 0; i < source.length(); i++) {
+            char c1 = source.charAt(i);
+            if (i + 1 < source.length()) {
+                char c2 = source.charAt(i + 1);
+                if (c1 == c2) {
+                    count++;
                 } else {
-                    break;
+                    res.append(count).append(c1);
+                    count = 1;
                 }
-            }
-            resultBuilder.append(count);
-            resultBuilder.append(chArr[i]);
+            } else res.append(count).append(c1);
         }
-        return resultBuilder.toString();
+        return res.toString();
     }
 }
 

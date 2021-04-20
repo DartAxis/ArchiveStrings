@@ -1,17 +1,18 @@
 package utils;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static utils.ArchiveString.processString;
+import static utils.ArchiveString.*;
 
 class ArchiveStringTest {
 
-    @Test
-    void archiveStringTest() {
-        assertEquals("3a3b",processString("aaabbb"));
-        assertEquals("3a3b4c2a",processString("aaabbbccccaa"));
-        assertEquals("2a2b6z",processString("aabbzzzzzz"));
+    @ParameterizedTest
+    @ValueSource(strings = {"aaabbb"})
+    void archiveStringTest(String line) {
+        assertEquals("3a3b",processString(line));
     }
 
     @Test
